@@ -1,0 +1,65 @@
+---
+title: "Dataset Simulation"
+author: "Humphrey"
+date: '2022-07-17'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Section 2. Simulate SV 1849 and 1854
+
+```{r}
+library(dplyr)
+#SIMULATING SV1849 SV1854
+set.seed(1)
+SV_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop){
+  SVonly<-round(rnorm(mean = mean_deaths, sd= sd_deaths, n = n), digits = 0)
+  SV_district<-paste("SV", seq(1:n),sep = "_")
+  year<-rep(year, length(SVonly))
+  population<-round(rnorm(mean = mean_pop, sd = sd_pop, n = n ), digits = 0) + SVonly*10
+  SV<-data.frame(cbind(deaths = SVonly, district_code = SV_district,
+                       year = year, population))
+  SV<-SV %>% mutate(deaths = as.numeric(as.character(deaths)),
+                    population = as.numeric(as.character(population)))
+  return(SV)
+}
+
+#SV1849
+
+SV1849<-SV_func(mean_deaths = 120, sd_deaths = 50, n = 20, year = 1849, mean_pop = 8045,sd_pop = 1000)
+head(SV1849)
+write.csv(SV1849, paste(here::here(), "SV1849.csv", sep = "/"), row.names = FALSE)
+
+#SV1854
+SV1854<-SV_func(mean_deaths = 60, sd_deaths = 50, n = 20, year = 1854, mean_pop = 8045,sd_pop = 1000)
+write.csv(SV1854, paste(here::here(), "SV1854.csv", sep = "/"), row.names = FALSE)
+
+```
+
+```{r}
+set.seed(1)
+Lam_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop) {
+  Lamonly<-round(rnorm(mean = mean_deaths, sd= sd_deaths, n = n), digits = 0)
+  Lam_district<-paste("Lambeth", seq(1:n), sep = "_")
+  year<- rep(year, length(Lamonly))
+  population<-round(rnorm(mean = mean_pop, sd = sd_pop, n = n ), digits = 0) + Lamonly*15
+  Lam<-data.frame(cbind(deaths = Lamonly, district_code = Lam_district, year = year, population))
+  Lam<-Lam %>% mutate(deaths = as.numeric(as.character(deaths)),
+                    population = as.numeric(as.character(population)))
+  return(Lam)
+}
+
+#Lam1849
+Lam1849<-Lam_func(mean_deaths = 200, sd_deaths = 50, n = 20, year = 1849, mean_pop = 9045,sd_pop = 1200)
+#head(Lam1849)
+
+write.csv(Lam1849, paste(here::here(), "Lam1849.csv", sep = "/"), row.names = FALSE)
+#Lam1854
+Lam1854<-Lam_func(mean_deaths = 40, sd_deaths = 50, n = 20, year = 1854, mean_pop = 9045,sd_pop = 1200)
+#head(Lam1854)
+write.csv(Lam1854, paste(here::here(), "Lam1854.csv", sep = "/"), row.names = FALSE)
+
+```
