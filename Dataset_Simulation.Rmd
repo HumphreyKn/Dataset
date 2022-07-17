@@ -7,12 +7,12 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
 ```
 
 # Section 1. Simulate SV 1849 and 1854
 
 ```{r}
-library(dplyr)
 #SIMULATING SV1849 SV1854
 set.seed(1)
 SV_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop){
