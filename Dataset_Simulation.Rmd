@@ -9,7 +9,7 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Section 2. Simulate SV 1849 and 1854
+# Section 1. Simulate SV 1849 and 1854
 
 ```{r}
 library(dplyr)
@@ -39,6 +39,8 @@ write.csv(SV1854, paste(here::here(), "SV1854.csv", sep = "/"), row.names = FALS
 
 ```
 
+
+# Section 2. Simulate Lam 1849 and 1854
 ```{r}
 set.seed(1)
 Lam_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop) {
