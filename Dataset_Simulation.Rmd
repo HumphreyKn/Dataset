@@ -26,21 +26,27 @@ SV_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop){
                     population = as.numeric(as.character(population)))
   return(SV)
 }
+```
 
-#SV1849
+## SV1849
 
+```{r}
 SV1849<-SV_func(mean_deaths = 120, sd_deaths = 50, n = 20, year = 1849, mean_pop = 8045,sd_pop = 1000)
-head(SV1849)
 write.csv(SV1849, paste(here::here(), "SV1849.csv", sep = "/"), row.names = FALSE)
+head(SV1849)
+```
 
-#SV1854
+## SV1854
+
+```{r}
 SV1854<-SV_func(mean_deaths = 60, sd_deaths = 50, n = 20, year = 1854, mean_pop = 8045,sd_pop = 1000)
 write.csv(SV1854, paste(here::here(), "SV1854.csv", sep = "/"), row.names = FALSE)
-
+head(SV1854)
 ```
 
 
 # Section 2. Simulate Lam 1849 and 1854
+
 ```{r}
 set.seed(1)
 Lam_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop) {
@@ -53,15 +59,21 @@ Lam_func<-function(mean_deaths, sd_deaths, n, year, mean_pop, sd_pop) {
                     population = as.numeric(as.character(population)))
   return(Lam)
 }
+```
 
-#Lam1849
+## Lam1849
+
+```{r}
 Lam1849<-Lam_func(mean_deaths = 200, sd_deaths = 50, n = 20, year = 1849, mean_pop = 9045,sd_pop = 1200)
-#head(Lam1849)
-
 write.csv(Lam1849, paste(here::here(), "Lam1849.csv", sep = "/"), row.names = FALSE)
-#Lam1854
+head(Lam1849)
+```
+
+## Lam1854
+
+```{r}
 Lam1854<-Lam_func(mean_deaths = 40, sd_deaths = 50, n = 20, year = 1854, mean_pop = 9045,sd_pop = 1200)
-#head(Lam1854)
 write.csv(Lam1854, paste(here::here(), "Lam1854.csv", sep = "/"), row.names = FALSE)
+head(Lam1854)
 
 ```
